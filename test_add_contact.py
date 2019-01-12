@@ -15,15 +15,21 @@ class TestAddContact(unittest.TestCase):
     
     def test_add_contact(self):
         driver = self.driver
-        driver.get("http://localhost/addressbook/")
-        driver.find_element_by_name("user").click()
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys("admin")
-        driver.find_element_by_name("pass").click()
-        driver.find_element_by_name("pass").clear()
-        driver.find_element_by_name("pass").send_keys("secret")
-        driver.find_element_by_xpath("//input[@value='Login']").click()
-        driver.find_element_by_link_text("add new").click()
+        self.open_home_page(driver)
+        self.login(driver)
+        self.open_add_new_page(driver)
+        self.create_contact(driver)
+        self.return_to_home_page(driver)
+        self.logout(driver)
+
+    def logout(self, driver):
+        driver.find_element_by_link_text("Logout").click()
+
+    def return_to_home_page(self, driver):
+        driver.find_element_by_link_text("home").click()
+
+    def create_contact(self, driver):
+        # input_contact_personal_information
         driver.find_element_by_name("firstname").click()
         driver.find_element_by_name("firstname").clear()
         driver.find_element_by_name("firstname").send_keys("dsbsbdsb")
@@ -45,6 +51,7 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("address").click()
         driver.find_element_by_name("address").clear()
         driver.find_element_by_name("address").send_keys("sbsbsbdbd")
+        # input_contact_telephones
         driver.find_element_by_name("home").click()
         driver.find_element_by_name("home").clear()
         driver.find_element_by_name("home").send_keys("7216412546")
@@ -54,6 +61,7 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("work").click()
         driver.find_element_by_name("work").clear()
         driver.find_element_by_name("work").send_keys("762145164")
+        # input_contact_emails
         driver.find_element_by_name("email").click()
         driver.find_element_by_name("email").clear()
         driver.find_element_by_name("email").send_keys("lalasla@mail.ru")
@@ -63,9 +71,11 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("email3").click()
         driver.find_element_by_name("email3").clear()
         driver.find_element_by_name("email3").send_keys("qfw@mail.ru")
+        # input_contact_homepage
         driver.find_element_by_name("homepage").click()
         driver.find_element_by_name("homepage").clear()
         driver.find_element_by_name("homepage").send_keys("dbbdddbbb")
+        # input_contact_birthday
         driver.find_element_by_name("bday").click()
         Select(driver.find_element_by_name("bday")).select_by_visible_text("10")
         driver.find_element_by_xpath("//option[@value='10']").click()
@@ -75,6 +85,7 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("byear").click()
         driver.find_element_by_name("byear").clear()
         driver.find_element_by_name("byear").send_keys("1990")
+        # input_contact_Secondary_information
         driver.find_element_by_name("address2").click()
         driver.find_element_by_name("address2").clear()
         driver.find_element_by_name("address2").send_keys("dvdsdsv")
@@ -84,10 +95,24 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("notes").click()
         driver.find_element_by_name("notes").clear()
         driver.find_element_by_name("notes").send_keys("dvdvssdvd")
+        # submit_contact_creation
         driver.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        driver.find_element_by_link_text("home").click()
-        driver.find_element_by_link_text("Logout").click()
-    
+
+    def open_add_new_page(self, driver):
+        driver.find_element_by_link_text("add new").click()
+
+    def login(self, driver):
+        driver.find_element_by_name("user").click()
+        driver.find_element_by_name("user").clear()
+        driver.find_element_by_name("user").send_keys("admin")
+        driver.find_element_by_name("pass").click()
+        driver.find_element_by_name("pass").clear()
+        driver.find_element_by_name("pass").send_keys("secret")
+        driver.find_element_by_xpath("//input[@value='Login']").click()
+
+    def open_home_page(self, driver):
+        driver.get("http://localhost/addressbook/")
+
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
