@@ -15,26 +15,26 @@ class TestAddContact(unittest.TestCase):
         self.accept_next_alert = True
     
     def test_add_contact(self):
-        driver = self.driver
-        self.open_home_page(driver)
-        self.login(driver, login="admin", password="secret")
-        self.open_add_new_page(driver)
-        self.create_contact(driver, Contact (firstname="dsbsbdsb", middlename="sdbdbsdbs", lastname="sdbsddbs",
+        self.login(login="admin", password="secret")
+        self.create_contact(Contact(firstname="dsbsbdsb", middlename="sdbdbsdbs", lastname="sdbsddbs",
                             nickname="dsbsbdds", title="sdbdsbbd", company="dsbsdbsb", address="sbsbsbdbd",
                             home_telephone="7216412546", mobile_telephone="7214651645", work_telephone="762145164", fax="ksskakk",
                             email="lalasla@mail.ru", email2="jwfkqjfkqjwfl@mail.ru", email3="qfw@mail.ru",
                             homepage="dbbdddbbb", bday="10", bmonth="November", byear="1990",aday="12", amonth="October",
                             ayear="1999", notes="dvdvssdvd", address2="dvdsdsv", phone2="vsdsvdsvd"))
-        self.return_to_home_page(driver)
-        self.logout(driver)
+        self.logout()
 
-    def logout(self, driver):
+    def logout(self):
+        driver = self.driver
         driver.find_element_by_link_text("Logout").click()
 
-    def return_to_home_page(self, driver):
+    def return_to_home_page(self):
+        driver = self.driver
         driver.find_element_by_link_text("home").click()
 
-    def create_contact(self, driver, contact):
+    def create_contact(self, contact):
+        driver = self.driver
+        self.open_add_new_page()
         # input_contact_personal_information
         driver.find_element_by_name("firstname").click()
         driver.find_element_by_name("firstname").clear()
@@ -115,11 +115,15 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("notes").send_keys(contact.notes)
         # submit_contact_creation
         driver.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+        self.return_to_home_page()
 
-    def open_add_new_page(self, driver):
+    def open_add_new_page(self):
+        driver = self.driver
         driver.find_element_by_link_text("add new").click()
 
-    def login(self, driver, login, password):
+    def login(self, login, password):
+        driver = self.driver
+        self.open_home_page()
         driver.find_element_by_name("user").click()
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys(login)
@@ -128,7 +132,8 @@ class TestAddContact(unittest.TestCase):
         driver.find_element_by_name("pass").send_keys(password)
         driver.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_home_page(self, driver):
+    def open_home_page(self):
+        driver = self.driver
         driver.get("http://localhost/addressbook/")
 
     def is_element_present(self, how, what):
