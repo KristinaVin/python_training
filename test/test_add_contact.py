@@ -10,10 +10,11 @@ def con_fix(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
-    
+
+
 def test_add_contact(con_fix):
     con_fix.login(login="admin", password="secret")
-    con_fix.create_contact(Contact(firstname="dsbsbdsb", middlename="sdbdbsdbs", lastname="sdbsddbs",
+    con_fix.contact.create_contact(Contact(firstname="dsbsbdsb", middlename="sdbdbsdbs", lastname="sdbsddbs",
                             nickname="dsbsbdds", title="sdbdsbbd", company="dsbsdbsb", address="sbsbsbdbd",
                             home_telephone="7216412546", mobile_telephone="7214651645", work_telephone="762145164", fax="ksskakk",
                             email="lalasla@mail.ru", email2="jwfkqjfkqjwfl@mail.ru", email3="qfw@mail.ru",
