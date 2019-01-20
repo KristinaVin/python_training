@@ -10,7 +10,7 @@ def app(request):
 
 
 
-@pytest.fixture
+@pytest.fixture (scope = "session")
 def con_fix(request):
     fixture = Сontact_fixture()
     request.addfinalizer(fixture.destroy)
