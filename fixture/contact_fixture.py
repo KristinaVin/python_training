@@ -2,12 +2,16 @@ from selenium import webdriver
 from fixture.contact import ContactHelper
 
 
+
 class Сontact_fixture:
 
     def __init__(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.contact = ContactHelper(self)
+
+
+
 
     def logout(self):
         driver = self.driver

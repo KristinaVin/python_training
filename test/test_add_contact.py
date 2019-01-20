@@ -4,6 +4,7 @@ from model.contact import Contact
 from fixture.contact_fixture import Сontact_fixture
 
 
+
 @pytest.fixture
 def con_fix(request):
     fixture = Сontact_fixture()
