@@ -38,4 +38,3 @@ class Сontact_fixture:
 
     def destroy(self):
         self.driver.quit()
-

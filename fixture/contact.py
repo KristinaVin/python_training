@@ -10,7 +10,6 @@ class ContactHelper:
 
 
 
-
     def create_contact(self, contact):
         driver = self.con_fix.driver
         self.open_add_new_page()

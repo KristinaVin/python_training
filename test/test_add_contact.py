@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
-import pytest
 from model.contact import Contact
-from fixture.contact_fixture import Сontact_fixture
 
-
-
-@pytest.fixture
-def con_fix(request):
-    fixture = Сontact_fixture()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 
