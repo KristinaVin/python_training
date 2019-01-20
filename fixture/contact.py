@@ -17,6 +17,20 @@ class ContactHelper:
         driver.find_element_by_xpath("(//input[@name='update'])[3]").click()
         self.con_fix.return_to_home_page()
 
+
+    def change_first_contact(self, contact):
+        driver = self.con_fix.driver
+        #  select first contact
+        driver.find_element_by_name("selected[]").click()
+        driver.find_element_by_xpath("(//img[@alt='Edit'])[2]").click()
+        #  submit modification
+        driver.find_element_by_name("firstname").click()
+        driver.find_element_by_name("firstname").clear()
+        driver.find_element_by_name("firstname").send_keys(contact.firstname)
+        driver.find_element_by_name("update").click()
+        self.con_fix.return_to_home_page()
+
+
     def create_contact(self, contact):
         driver = self.con_fix.driver
         self.open_add_new_page()
