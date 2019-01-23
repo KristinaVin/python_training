@@ -8,6 +8,15 @@ class ContactHelper:
     def __init__(self, con_fix):
         self.con_fix = con_fix
 
+    def delete_contact_homepage(self):
+        driver = self.con_fix.driver
+        #  select first contact
+        driver.find_element_by_name("selected[]").click()
+        #  submit deletion
+        driver.find_element_by_xpath("//input[@value='Delete']").click()
+        driver.switch_to_alert().accept()
+
+
     def delete_first_contact(self):
         driver = self.con_fix.driver
         #  select first contact

@@ -11,7 +11,6 @@ class Сontact_fixture:
 
 
 
-
     def logout(self):
         driver = self.driver
         driver.find_element_by_link_text("Logout").click()
