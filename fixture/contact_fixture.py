@@ -5,35 +5,35 @@ from fixture.contact import ContactHelper
 class Сontact_fixture:
 
     def __init__(self):
-        self.driver = webdriver.Firefox()
-        self.driver.implicitly_wait(30)
+        self.wd = webdriver.Firefox()
+        self.wd.implicitly_wait(30)
         self.contact = ContactHelper(self)
 
 
 
     def logout(self):
-        driver = self.driver
-        driver.find_element_by_link_text("Logout").click()
-        driver.find_element_by_name("user")
+        wd = self.wd
+        wd.find_element_by_link_text("Logout").click()
+        wd.find_element_by_name("user")
 
     def return_to_home_page(self):
-        driver = self.driver
-        driver.find_element_by_link_text("home").click()
+        wd = self.wd
+        wd.find_element_by_link_text("home").click()
 
     def login(self, login, password):
-        driver = self.driver
+        wd = self.wd
         self.open_home_page()
-        driver.find_element_by_name("user").click()
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys(login)
-        driver.find_element_by_name("pass").click()
-        driver.find_element_by_name("pass").clear()
-        driver.find_element_by_name("pass").send_keys(password)
-        driver.find_element_by_xpath("//input[@value='Login']").click()
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(login)
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self):
-        driver = self.driver
-        driver.get("http://localhost/addressbook/")
+        wd = self.wd
+        wd.get("http://localhost/addressbook/")
 
     def destroy(self):
-        self.driver.quit()
+        self.wd.quit()
