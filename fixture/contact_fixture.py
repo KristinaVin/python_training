@@ -1,6 +1,5 @@
 from selenium import webdriver
 from fixture.contact import ContactHelper
-from fixture.manager import Manager
 
 
 class Сontact_fixture:
@@ -9,7 +8,7 @@ class Сontact_fixture:
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.contact = ContactHelper(self)
-        self.manager = Manager(self)
+
 
 
 
