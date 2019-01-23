@@ -1,8 +1,6 @@
 from selenium.webdriver.support.ui import Select
 
 
-
-
 class ContactHelper:
 
     def __init__(self, con_fix):
@@ -16,7 +14,6 @@ class ContactHelper:
         driver.find_element_by_xpath("//input[@value='Delete']").click()
         driver.switch_to_alert().accept()
 
-
     def delete_first_contact(self):
         driver = self.con_fix.driver
         #  select first contact
@@ -26,23 +23,17 @@ class ContactHelper:
         driver.find_element_by_xpath("(//input[@name='update'])[3]").click()
         self.con_fix.return_to_home_page()
 
-
     def change_first_contact(self, contact):
         driver = self.con_fix.driver
         #  select first contact
         driver.find_element_by_name("selected[]").click()
         driver.find_element_by_xpath("(//img[@alt='Edit'])[2]").click()
         #  submit modification
-        driver.find_element_by_name("firstname").click()
-        driver.find_element_by_name("firstname").clear()
-        driver.find_element_by_name("firstname").send_keys(contact.firstname)
+        self.contract_form_fill(contact)
         driver.find_element_by_name("update").click()
-        self.con_fix.return_to_home_page()
 
-
-    def create_contact(self, contact):
+    def contract_form_fill(self, contact):
         driver = self.con_fix.driver
-        self.open_add_new_page()
         # input_contact_personal_information
         driver.find_element_by_name("firstname").click()
         driver.find_element_by_name("firstname").clear()
@@ -121,6 +112,11 @@ class ContactHelper:
         driver.find_element_by_name("notes").click()
         driver.find_element_by_name("notes").clear()
         driver.find_element_by_name("notes").send_keys(contact.notes)
+
+    def create_contact(self, contact):
+        driver = self.con_fix.driver
+        self.open_add_new_page()
+        self.contract_form_fill(contact)
         # submit_contact_creation
         driver.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.con_fix.return_to_home_page()
