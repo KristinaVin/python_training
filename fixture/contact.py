@@ -3,11 +3,11 @@ from selenium.webdriver.support.ui import Select
 
 class ContactHelper:
 
-    def __init__(self, con_fix):
-        self.con_fix = con_fix
+    def __init__(self, app):
+        self.app = app
 
     def delete_contact_homepage(self):
-        wd = self.con_fix.wd
+        wd = self.app.wd
         #  select first contact
         wd.find_element_by_name("selected[]").click()
         #  submit deletion
@@ -15,16 +15,18 @@ class ContactHelper:
         wd.switch_to_alert().accept()
 
     def delete_first_contact(self):
-        wd = self.con_fix.wd
+        wd = self.app.wd
+        self.app.return_to_home_page
         #  select first contact
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("(//img[@alt='Edit'])[2]").click()
         #  submit deletion
         wd.find_element_by_xpath("(//input[@name='update'])[3]").click()
-        self.con_fix.return_to_home_page()
+        self.app.return_to_home_page()
 
     def change_first_contact(self, contact):
-        wd = self.con_fix.wd
+        self.app.return_to_home_page
+        wd = self.app.wd
         #  select first contact
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("(//img[@alt='Edit'])[2]").click()
@@ -33,7 +35,7 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
 
     def contract_form_fill(self, contact):
-        wd = self.con_fix.wd
+        wd = self.app.wd
         # input_contact_personal_information
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -114,15 +116,16 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
 
     def create_contact(self, contact):
-        wd = self.con_fix.wd
+        wd = self.app.wd
+        self.app.return_to_home_page
         self.open_add_new_page()
         self.contract_form_fill(contact)
         # submit_contact_creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        self.con_fix.return_to_home_page()
+        self.app.return_to_home_page()
 
     def open_add_new_page(self):
-        wd = self.con_fix.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
 
 
