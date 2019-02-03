@@ -6,11 +6,16 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
     def delete_contact_homepage(self):
+        wd = self.app.wd
+        self.delete_contact_homepage_by_index(0)
+
+    def delete_contact_homepage_by_index(self, index):
         wd = self.app.wd
         self.app.return_to_home_page()
         #  select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(index)
         #  submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
@@ -18,22 +23,31 @@ class ContactHelper:
         self.contact_cache = None
 
 
-
     def delete_first_contact(self):
+        wd = self.app.wd
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.app.return_to_home_page()
         #  select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         #  submit deletion
         wd.find_element_by_xpath("(//input[@name='update'])[3]").click()
         self.app.return_to_home_page()
         self.contact_cache = None
 
-    def change_first_contact(self, contact):
+
+
+    def change_first_contact(self):
+        wd = self.app.wd
+        self.modify_contact_by_index(0)
+
+    def  modify_contact_by_index(self, index, contact):
         self.app.return_to_home_page()
         wd = self.app.wd
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         #  submit modification
         self.contract_form_fill(contact)
@@ -41,9 +55,15 @@ class ContactHelper:
         self.app.return_to_home_page()
         self.contact_cache = None
 
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+
+
     def select_first_contact(self):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(0)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
