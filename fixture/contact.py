@@ -15,6 +15,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
 
 
@@ -27,6 +28,7 @@ class ContactHelper:
         #  submit deletion
         wd.find_element_by_xpath("(//input[@name='update'])[3]").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def change_first_contact(self, contact):
         self.app.return_to_home_page()
@@ -37,6 +39,7 @@ class ContactHelper:
         self.contract_form_fill(contact)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -100,6 +103,7 @@ class ContactHelper:
         # submit_contact_creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def open_add_new_page(self):
         wd = self.app.wd
@@ -120,14 +124,19 @@ class ContactHelper:
         self.contract_form_fill(new_contact_data)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
+
+    contact_cache = None
 
     def get_contact_list(self):
-        wd = self.app.wd
-        contacts = []
-        for element in wd.find_elements_by_css_selector("tr")[1:]:
-            text = element.find_element_by_name("selected[]").get_attribute("title")
-            id = element.find_element_by_name("selected[]").get_attribute("id")
-            contacts.append(Contact(firstname=text.split()[1][1:], lastname=text.split()[2][:-1], id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.return_to_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_css_selector("tr")[1:]:
+                text = element.find_element_by_name("selected[]").get_attribute("title")
+                id = element.find_element_by_name("selected[]").get_attribute("id")
+                self.contact_cache.append(Contact(firstname=text.split()[1][1:], lastname=text.split()[2][:-1], id=id))
+        return list(self.contact_cache)
 
 
