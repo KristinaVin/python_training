@@ -41,10 +41,8 @@ class Contact:
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
                and (self.firstname is None or other.firstname is None or self.firstname == other.firstname) \
-               and (self.lastname is None or other.lastname is None or self.lastname == other.lastname) \
-               and (self.address is None or other.address is None or self.address == other.address) \
-               and (self.all_phones_from_home_page is None or other.all_phones_from_home_page is None or self.all_phones_from_home_page == other.all_phones_from_home_page) \
-               and (self.all_emails_from_homepage is None or other.all_emails_from_homepage is None or self.all_emails_from_homepage == other.all_emails_from_homepage)
+               and (self.lastname is None or other.lastname is None or self.lastname == other.lastname)
+
 
 
     def id_or_max(self):
