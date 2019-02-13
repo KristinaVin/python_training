@@ -33,15 +33,16 @@ class ContactHelper:
         wd = self.app.wd
         self.app.return_to_home_page()
         #  select first contact
-        self.select_contact_by_index(index)
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.choice_del_contact_by_index(index)
         #  submit deletion
         wd.find_element_by_xpath("(//input[@name='update'])[3]").click()
         wd.find_elements_by_css_selector("div.msgbox")
         self.app.return_to_home_page()
         self.contact_cache = None
 
-
+    def choice_del_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def change_first_contact(self):
         wd = self.app.wd
