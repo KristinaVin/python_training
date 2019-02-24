@@ -249,3 +249,24 @@ class ContactHelper:
         return Contact(home_telephone=home_telephone, work_telephone=work_telephone,
                        mobile_telephone=mobile_telephone, phone2=phone2)
 
+    def add_contact_to_group(self, Contact, Group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_contact_by_id(Contact.id)
+        wd.find_element_by_name("to_group").send_keys(Group.name)
+        wd.find_element_by_name("add").click()
+
+    def delete_contact_from_group(self, Contact, Group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_name("group").send_keys(Group.name)
+        wd.find_element_by_css_selector("body").click()
+        self.select_contact_by_id(Contact.id)
+        wd.find_element_by_name("remove").click()
+        self.app.return_to_home_page()
+        wd.find_element_by_name("group").send_keys("[all]")
+        wd.find_element_by_css_selector("body").click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
