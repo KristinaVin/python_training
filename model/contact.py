@@ -43,15 +43,8 @@ class Contact:
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
                and (self.firstname is None or other.firstname is None or self.firstname == other.firstname) \
-               and (self.lastname is None or other.lastname is None or self.lastname == other.lastname) \
-               and (self.address is None or other.address is None or self.address == other.address) \
-               and (self.home_telephone is None or other.home_telephone is None or self.home_telephone == other.home_telephone) \
-               and (self.mobile_telephone is None or other.mobile_telephone is None or self.mobile_telephone == other.mobile_telephone) \
-               and (self.work_telephone is None or other.work_telephone is None or self.work_telephone == other.work_telephone) \
-               and (self.email is None or other.email is None or self.email == other.email) \
-               and (self.email2 is None or other.email2 is None or self.email2 == other.email2) \
-               and (self.email3 is None or other.email3 is None or self.email3 == other.email3) \
-               and (self.phone2 is None or other.phone2 is None or self.phone2 == other.phone2) \
+               and (self.lastname is None or other.lastname is None or self.lastname == other.lastname)
+
 
 
 
